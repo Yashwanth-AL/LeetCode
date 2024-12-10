@@ -12,7 +12,6 @@ public class Solution {
                 flippedPattern.append(1 - val); // Flip the value
             }
 
-            // Use the canonical representation
             String key = pattern.toString();
             String flippedKey = flippedPattern.toString();
 
