@@ -1,26 +1,32 @@
-// using sliding window
-
-class Solution:
-    def shortestSubarray(self, nums: List[int], k: int) -> int:
-        n = len(nums)
-        sum_arr = [0] * (n + 1)
+public class Solution {
+    public int shortestSubarray(int[] nums, int k) {
+        int n = nums.length;
+        long[] prefixSum = new long[n + 1];
         
-        for i in range(n):
-            sum_arr[i + 1] = sum_arr[i] + nums[i]
+        // Compute prefix sum
+        for (int i = 0; i < n; i++) {
+            prefixSum[i + 1] = prefixSum[i] + nums[i];
+        }
         
-        q = [0] * (n + 1)
-        l = r = 0
-        min_length = n + 1
+        // Deque to maintain indices of prefix sum in increasing order
+        Deque<Integer> deque = new LinkedList<>();
+        int minLength = Integer.MAX_VALUE;
         
-        for i in range(len(sum_arr)):
-            while r > l and sum_arr[i] >= sum_arr[q[l]] + k:
-                min_length = min(min_length, i - q[l])
-                l += 1
+        for (int i = 0; i <= n; i++) {
+            // Check if the subarray sum is at least k
+            while (!deque.isEmpty() && prefixSum[i] - prefixSum[deque.peekFirst()] >= k) {
+                minLength = Math.min(minLength, i - deque.pollFirst());
+            }
             
-            while r > l and sum_arr[i] <= sum_arr[q[r - 1]]:
-                r -= 1
+            // Maintain monotonicity of the deque
+            while (!deque.isEmpty() && prefixSum[i] <= prefixSum[deque.peekLast()]) {
+                deque.pollLast();
+            }
             
-            q[r] = i
-            r += 1
+            // Add current index to the deque
+            deque.addLast(i);
+        }
         
-        return min_length if min_length <= n else -1
+        return minLength == Integer.MAX_VALUE ? -1 : minLength;
+    }
+}
