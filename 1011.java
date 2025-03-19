@@ -1,7 +1,11 @@
 class Solution {
     public int shipWithinDays(int[] weights, int days) {
-        int left = getMax(weights);
-        int right = getSum(weights);
+        int left = weights[0];
+        int right = 0;
+        for(int num : weights) {
+            left = Math.max(num, left);
+            right += num;
+        }
 
         while(left < right) {
             int mid = left + (right - left) / 2;
@@ -29,19 +33,4 @@ class Solution {
         return true;
     }
 
-   public int getMax(int[] arr) {
-        int max = arr[0];
-        for(int num : arr) {
-            max = Math.max(num, max);
-        }
-        return max;
-    }
-
-    public int getSum(int[] nums) {
-        int result = 0;
-        for(int num : nums) {
-            result += num;
-        }
-        return result;
-    }
 }
