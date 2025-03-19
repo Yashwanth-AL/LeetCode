@@ -1,32 +1,24 @@
 public class Solution {
     public int shortestSubarray(int[] nums, int k) {
         int n = nums.length;
-        long[] prefixSum = new long[n + 1];
-        
-        // Compute prefix sum
-        for (int i = 0; i < n; i++) {
-            prefixSum[i + 1] = prefixSum[i] + nums[i];
+        Deque<Integer> que = new LinkedList<>();
+        int min = Integer.MAX_VALUE;
+
+        long prefixSum[] = new long[n+1];
+        for(int i = 0; i < n; i++){
+            prefixSum[i+1] = prefixSum[i] + nums[i];
         }
-        
-        // Deque to maintain indices of prefix sum in increasing order
-        Deque<Integer> deque = new LinkedList<>();
-        int minLength = Integer.MAX_VALUE;
-        
-        for (int i = 0; i <= n; i++) {
-            // Check if the subarray sum is at least k
-            while (!deque.isEmpty() && prefixSum[i] - prefixSum[deque.peekFirst()] >= k) {
-                minLength = Math.min(minLength, i - deque.pollFirst());
+
+        for(int i = 0; i <= n; i++){
+            while(!que.isEmpty() && prefixSum[i] - prefixSum[que.peekFirst()] >= k ){
+                min = Math.min(min, i - que.pollFirst());
             }
-            
-            // Maintain monotonicity of the deque
-            while (!deque.isEmpty() && prefixSum[i] <= prefixSum[deque.peekLast()]) {
-                deque.pollLast();
+            while(!que.isEmpty() && prefixSum[i] <= prefixSum[que.peekLast()]){
+                que.pollLast();
             }
-            
-            // Add current index to the deque
-            deque.addLast(i);
+            que.addLast(i);
         }
-        
-        return minLength == Integer.MAX_VALUE ? -1 : minLength;
+
+        return min == Integer.MAX_VALUE ? -1 : min;
     }
 }
