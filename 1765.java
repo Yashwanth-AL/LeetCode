@@ -5,19 +5,17 @@ class Solution {
         Queue<int[]> queue = new LinkedList<>();
         int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
-        // Step 1: Initialize heights and queue
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (isWater[i][j] == 1) {
-                    height[i][j] = 0;  // Water cells have height 0
+                    height[i][j] = 0;   
                     queue.offer(new int[]{i, j});
                 } else {
-                    height[i][j] = -1; // Mark land cells as unvisited
+                    height[i][j] = -1;  
                 }
             }
         }
-
-        // Step 2: Multi-Source BFS
+ 
         while (!queue.isEmpty()) {
             int[] cell = queue.poll();
             int r = cell[0], c = cell[1];
@@ -26,8 +24,8 @@ class Solution {
                 int nr = r + dir[0], nc = c + dir[1];
 
                 if (nr >= 0 && nr < m && nc >= 0 && nc < n && height[nr][nc] == -1) {
-                    height[nr][nc] = height[r][c] + 1; // Assign height
-                    queue.offer(new int[]{nr, nc}); // Push to queue
+                    height[nr][nc] = height[r][c] + 1; 
+                    queue.offer(new int[]{nr, nc}); 
                 }
             }
         }
