@@ -23,9 +23,6 @@ class Solution {
         if(visited[start] == 0){
             visited[start] = 1;
         } 
-        if(visited[end] == 1) {
-            return true;
-        }
         for(int i = 0; i < graph.length; i++) {
             if(graph[start][i] == 1 && visited[i] == 0){
                 dfs(graph, i, end, visited);
