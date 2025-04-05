@@ -1,5 +1,6 @@
 public class Solution {
     public boolean hasCycle(ListNode head) {
+
         HashSet<ListNode> node = new HashSet<>();
         ListNode current = head;
 
@@ -10,6 +11,7 @@ public class Solution {
             node.add(current);
             current = current.next;
         }
+
         return false;
     }
 }
