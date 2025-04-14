@@ -5,3 +5,9 @@ class Solution:
             if target - num in map:
                 return [map[target - num], i]
             map[num] = i
+
+"""
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+"""
