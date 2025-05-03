@@ -24,5 +24,6 @@ class Solution {
             generate(current, open, close + 1, n);
             current.deleteCharAt(current.length() - 1);
         }
+
     }
 }
