@@ -13,7 +13,7 @@ class Solution {
                 } else {
                     left = mid + 1;
                 }
-            }else {
+            } else {
                 if(target <= nums[right] && target > nums[mid]){
                     left = mid + 1;
                 } else {
