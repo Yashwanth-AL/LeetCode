@@ -12,6 +12,7 @@ class Solution {
                 left++;
             }
         }
+        
         return result;
     }
 }
