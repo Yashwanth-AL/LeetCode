@@ -2,14 +2,10 @@ class Solution {
     List<Integer> result = new ArrayList<>();
     
     public List<Integer> postorderTraversal(TreeNode root) {
-        traverse(root);
-        return result;
-    }
-
-    public void traverse(TreeNode root) {
-        if(root == null) return;
-        traverse(root.left);
-        traverse(root.right);
+        if(root == null) return result;
+        postorderTraversal(root.left);
+        postorderTraversal(root.right);
         result.add(root.val);
+        return result;
     }
 }
